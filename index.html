@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Bubble-Bobble</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="/css/canvas.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/tailwind-purged.css"/>
+
+        <!-- Preload API -->
+        <link rel="preload" type="/jsdos/wdosbox.js" as="script"/>
+        <link rel="preload" href="/jsdos/js-dos.js" as="script"/>
+
+        <!-- Preload API -->
+        <link rel="prefetch" href="/api/api.js" as="script"/>
+        <link rel="prefetch" href="/api/lib/AsciiMapping.js" as="script"/>
+        <link rel="prefetch" href="/api/lib/DosEmulatorImpl.js" as="script"/>
+        <link rel="prefetch" href="/api/lib/DropJoystickImpl.js" as="script"/>
+        <link rel="prefetch" href="/api/lib/GamepadControllerImpl.js" as="script"/>
+        <link rel="prefetch" href="/api/lib/Ocr.js" as="script"/>
+
+        <!-- Preload Bubble-Bobble-->
+        <link rel="prefetch" href="/games/bubble/bubble.js" as="script"/>
+        <link rel="prefetch" href="/games/bubble/bubble.jsdos" as="fetch"/>
+        <link rel="prefetch" href="/games/bubble/bubble-controls.js" as="script"/>
+        <link rel="prefetch" href="/games/bubble/bubble-digits.js" as="script"/>
+    </head>
+    <body>
+        <div id="gameContainer">
+            <img style="width: 100%; height: 100%; object-fit: scale-down" id="instructions" src="/assets/control_screens/bubble/bubble.png">
+            <div id="loading">
+                <img src="/assets/loading_screens/loading_screen.gif"></img>
+            </div>
+            <canvas id="controlCanvas"></canvas>
+            <div id="canvasContainer"></div>
+        </div>
+        <script src="/jsdos/js-dos.js"></script>
+        <script type="module">
+            import {runBubble} from "./bubble.js";
+            let canvasContainer = document.getElementById('canvasContainer');
+            let controlCanvas = document.getElementById('controlCanvas');
+            let instructions = document.getElementById("instructions");
+            let loading = document.getElementById("loading");
+
+                window.addEventListener('load', () => {
+                runBubble(Dos, canvasContainer, emulators, controlCanvas, loading, instructions, window)
+            });
+        </script>
+        <script>
+            if (('ontouchstart' in window) ||
+                (navigator.maxTouchPoints > 0) ||
+                (navigator.msMaxTouchPoints > 0)){
+                document.getElementById(id="instructions").src="/assets/control_screens/digger/digger-loader-mobile.jpg";
+            }
+        </script>
+    </body>
+</html>
